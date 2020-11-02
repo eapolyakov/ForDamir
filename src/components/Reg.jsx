@@ -8,7 +8,7 @@ export default class FormContainer extends React.Component {
         super(props);
 
         this.state = {
-            SendMail:{
+            AddUser:{
                 name: '',
                 email: '',
                 pass: ''
@@ -18,38 +18,37 @@ export default class FormContainer extends React.Component {
         this.handleEmail = this.handleEmail.bind(this);
         this.handleFullName = this.handleFullName.bind(this);
         this.handleAddUser = this.handleAddUser.bind(this);
-        this.handleClearForm = this.handleClearForm.bind(this);
     }
 
     /* This lifecycle hook gets executed when the component mounts */
 
     handleFullName(e) {
         let value = e.target.value;
-        this.setState( prevState => ({ SendMail :
-                {...prevState.SendMail, name: value
+        this.setState( prevState => ({ AddUser :
+                {...prevState.AddUser, name: value
                 }
-        }), () => console.log(this.state.SendMail))
+        }), () => console.log(this.state.AddUser))
     }
 
     handleEmail(e) {
         let value = e.target.value;
-        this.setState( prevState => ({ SendMail :
-                {...prevState.SendMail, email: value
+        this.setState( prevState => ({ AddUser :
+                {...prevState.AddUser, email: value
                 }
-        }), () => console.log(this.state.SendMail))
+        }), () => console.log(this.state.AddUser))
     }
 
     handlePass(e) {
         let value = e.target.value;
-        this.setState( prevState => ({ SendMail :
-                {...prevState.SendMail, pass: value
+        this.setState( prevState => ({ AddUser :
+                {...prevState.AddUser, pass: value
                 }
-        }), () => console.log(this.state.SendMail))
+        }), () => console.log(this.state.AddUser))
     }
 
     handleAddUser(e) {
         e.preventDefault();
-        let userData = this.state.SendMail;
+        let userData = this.state.AddUser;
 
         fetch('addUser',{
             method: "POST",
@@ -67,36 +66,24 @@ export default class FormContainer extends React.Component {
         })
     }
 
-    handleClearForm(e) {
-
-        e.preventDefault();
-        this.setState({
-            SendMail:{
-                name: '',
-                email: '',
-                pass: ''
-            },
-        })
-    }
-
     render() {
         return <Container>
             <div><h1>Регистрация пользователя</h1></div>
             <Form onSubmit={this.handleAddUser}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control name ='email' value={this.state.SendMail.email}  handleChange={this.handleEmail} type="email" placeholder="Enter email" />
+                    <Form.Control name ='email' value={this.state.AddUser.email}  handleChange={this.handleEmail} type="email" placeholder="Enter email" />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
                 </Form.Group>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control name ='name' value={this.state.SendMail.name}  handleChange={this.handleFullName} type="text" placeholder="Enter name" />
+                    <Form.Control name ='name' value={this.state.AddUser.name}  handleChange={this.handleFullName} type="text" placeholder="Enter name" />
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control name ='pass' value={this.state.SendMail.pass}  handleChange={this.handlePass} type="password" placeholder="Password" />
+                    <Form.Control name ='pass' value={this.state.AddUser.pass}  handleChange={this.handlePass} type="password" placeholder="Password" />
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
